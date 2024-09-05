@@ -1,31 +1,59 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+                                  
 
 .App-header {
-  background-color: #282c34;
+  background-color: #fdfeff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(247, 249, 251);
+  
+
+}
+.title-container {
+  border: 2px solid #3498db; /* Color del borde: Azul claro */
+  border-radius: 10px; /* Redondea las esquinas */
+  padding: 20px;
+  background-color: #236ce0; /* Fondo gris claro */
+
 }
 
 .App-link {
-  color: #61dafb;
+  color: #1994b6;
+}
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif; /* Ejemplo de tipografía de Google Fonts */
+}
+
+.brand-wrapper {
+  background-color: #f9f9f9; /* Fondo gris claro */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(192, 53, 53, 0.1);
+  color: rgb(11, 11, 11);
+  font-size: calc(3px + 2vmin);
+}
+
+.panel-heading {
+  background-color: #faf6f6; /* Fondo gris claro */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(192, 53, 53, 0.1);
+  color: rgb(11, 11, 11);
+  font-size: calc(3px + 2vmin);
+}
+.form-group-margin {
+  margin-top: 20px; /* Adjust margin as needed */
 }
 
 @keyframes App-logo-spin {
@@ -35,4 +63,6 @@
   to {
     transform: rotate(360deg);
   }
+  
+  
 }
