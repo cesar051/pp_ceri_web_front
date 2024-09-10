@@ -2,11 +2,13 @@ import React from "react";
 import SectionHeader from "../../components/SectionHeader";
 import { Link } from "react-router-dom";
 import LoginForm from "../../components/LoginForm";
+import { useState } from "react";
 
 const LandingPage = () => {
+
     return (
         <>
-            <div className="App" class=" col-color">
+            <div className="App col-color">
                 <header className="App-header">
                     <div className="App">
 
@@ -22,7 +24,7 @@ const LandingPage = () => {
                                 <div>
                                 </div>
 
-                                <div class="brand-wrapper">
+                                <div className="brand-wrapper">
 
                                     <p>Desde esta plataforma web accederá a la información financiera de una manera ágil, oportuna y segura , garantizando la comunicación con nuestros proveedores.</p>
                                     <p>Usted podrá consultar la siguiente información financiera:</p>
@@ -34,11 +36,11 @@ const LandingPage = () => {
 
 
                                 </div>
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">Ingresar a mi cuenta</h4>
+                                <div className="panel-heading">
+                                    <h4 className="panel-title">Ingresar a mi cuenta</h4>
 
                                     <LoginForm />
-                                    <div class="panel-registro">
+                                    <div className="panel-registro">
                                         <nav>
                                             <p></p>
                                             <Link to="/pages/RecoverPassword">Recordar contraseña</Link> | <Link to="/pages/register">Registro</Link>
@@ -51,7 +53,6 @@ const LandingPage = () => {
                         }
                     </div>
                 </header>
-
             </div>
         </>
     );
