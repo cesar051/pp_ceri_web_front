@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SectionHeader from "../../components/SectionHeader";
 import { Link } from "react-router-dom";
 import LoginForm from "../../components/LoginForm";
-import { useState } from "react";
+import { useAuth } from "../../auth/AuthProvider";
 
 const LandingPage = () => {
+    const auth = useAuth();
+
+    useEffect(() => {
+        console.log("entreando landing")
+        console.log("logueado " + auth.isAuthenticated);
+        console.log("usuario " + auth.getUser());
+
+    }, [])
 
     return (
         <>
@@ -43,7 +51,7 @@ const LandingPage = () => {
                                     <div className="panel-registro">
                                         <nav>
                                             <p></p>
-                                            <Link to="/pages/RecoverPassword">Recordar contraseña</Link> | <Link to="/pages/register">Registro</Link>
+                                            <Link to="/changePassword">Recordar contraseña</Link> | <Link to="/signup">Registro</Link>
                                         </nav>
                                     </div>
                                 </div>

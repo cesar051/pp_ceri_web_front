@@ -1,15 +1,57 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import { Navigate, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../auth/AuthProvider';
+import { queryGET } from '../helpers/queryCall';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const baseUrl = "http://localhost:5000/";
   const navigate = useNavigate();
-
+  const auth = useAuth();
   const emailAndPasswordValid = () => {
     return true
+  }
+
+  useEffect(() => {
+    console.log("pagina login")
+    console.log("autenticado " + auth.isAuthenticated);
+    if (auth.isAuthenticated) {
+      navigate("/my/home");
+    }
+  }, [])
+
+  useEffect(() => {
+    console.log("pagina login")
+    console.log("autenticado " + auth.isAuthenticated);
+    if (auth.isAuthenticated) {
+      navigate("/my/home");
+    }
+  }, [auth.isAuthenticated])
+
+  const loginQueryCallback = (result) => {
+    console.log(result)
+    console.log("llega")
+    if (result) {
+
+      if (result.statusCode === 200) {
+        if (result.accessToken && result.refreshToken) {
+
+          auth.saveUser(result)
+          navigate("/my/home");
+          console.log(result);
+
+          console.log("logueado")
+        } else {
+          console.log("not enough parameters")
+          //setLoginSuccessful(false);
+        }
+      } else if (result.statusCode === 400 && result.message === "wrong user/password") {
+        //toast.warn("Contraseña/Usuario incorrectos");
+      }
+
+    }
+    // Aquí puedes trabajar con los datos obtenidos en la respuesta  
   }
 
   const handleSubmit = (e) => {
@@ -20,42 +62,10 @@ const LoginForm = () => {
     console.log('Password:', password);
 
     if (emailAndPasswordValid()) {
+
       const url = `${baseUrl}userLogin?userEmail=${encodeURIComponent(email)}&userPassword=${encodeURIComponent(password)}`;
-      fetch(url)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('La solicitud no fue exitosa');
-          }
-          return response.json(); // Si esperas una respuesta JSON
-        })
-        .then(result => {
-          console.log(result)
-          if (result) {
-            if (result.statusCode === 200) {
-              if (result.token) {
-                localStorage.setItem('token', result.token)
-                //setLoginSuccessful(true);
+      queryGET(url, loginQueryCallback)
 
-                //const tokenDecode = decodeJWT();
-                //toast.success("Exitoso");
-                //dispatch(login({ token: result.token.toString(), id: tokenDecode.userId, date: tokenDecode.exp }))
-
-                navigate("/my/home");
-                console.log("logueado")
-              } else {
-                //setLoginSuccessful(false);
-              }
-            } else if (result.statusCode === 400 && result.message === "wrong user/password") {
-              //toast.warn("Contraseña/Usuario incorrectos");
-            }
-
-          }
-          // Aquí puedes trabajar con los datos obtenidos en la respuesta            
-
-        })
-        .catch(error => {
-          console.error('Hubo un problema con la solicitud fetch:', error);
-        });
     }
   };
 

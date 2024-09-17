@@ -4,45 +4,72 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import SectionHeader from './components/SectionHeader';
 import LoginForm from './components/LoginForm';
-import { Route, Routes, BrowserRouter, Navigate, Link } from 'react-router-dom';
+import { Route, Routes, BrowserRouter, Navigate, Link, createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import LandingPage from './pages/LandingPage/LandingPage';
 import Home from './pages/Home/Home';
 import { validationToken } from './helpers/token';
 import UserLogueado from './rutas/UserLogueado';
-// ...
+import { AuthProvider } from './auth/AuthProvider';
+import Registro from './pages/Registro/Registro';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Users from './pages/Users/Users';
+import UserAdmin from './rutas/UserAdmin';
+import ChangePassword from './pages/ChangePassword/ChangePassword';
 
-const fetchData = async () => {
-  const response = await axios.get('https://api.example.com/data');
-  console.log(response.data);
-};
-function App() {
-  const [logueado, setLogueado] = useState(validationToken());
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <LandingPage />
+  },
+  {
+    path: "/signup",
+    element: <Registro />
+  },
+  {
+    path: "/users",
+    element: <Users />
+  },
+  {
+    path: "/changePassword",
+    element: <ChangePassword />
+  },
+  {
+    path: "/",
+    element: <UserLogueado />,
+    children: [
+      {
+        path: "/my/home",
+        element: <Home></Home>
+      },
+      {
+        path: "/admin",
+        element: <UserAdmin />,
+        children: [
+          {
+            path: "/admin/users",
+            element: <Users />
+          },
 
-  console.log(`logueado: ${logueado}`)
-
-  const updateLogueado = () => {
-    setLogueado(validationToken());
+        ]
+      }
+    ]
   }
+])
+
+function App() {
 
   return (
-    <BrowserRouter>
-
-      <Routes>
-
-        <Route path='/' element={<LandingPage />} />
-
-        {logueado ? (
-          <Route path='my/*' element={<UserLogueado />} />
-        ) : (
-          <Route path='my/*' element={<Navigate to='/' />} />
-        )}
-      </Routes>
-      
-    </BrowserRouter>
-
+    <>
+      <ToastContainer />
+      <AuthProvider>
+        <RouterProvider router={router}></RouterProvider>
+      </AuthProvider>
+    </>
   );
 
 }
 
 export default App;
+
