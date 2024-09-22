@@ -16,8 +16,6 @@ export function AuthProvider({ children }) {
     const [user, setUser] = useState({})
 
     useEffect(() => {
-        console.log("llega");
-
         checkAuth();
     }, [])
 
@@ -32,7 +30,7 @@ export function AuthProvider({ children }) {
         const refreshToken = getRefreshToken();
         const callBackGetUserBasicInfo = (data) => {
             if (data.statusCode === 200) {
-                console.log("borrado " + refreshToken);
+                //deslogueado exitosamente
             }
         }
         const errorCallBackFunctionGetUserBasicInfo = () => { }
@@ -51,7 +49,6 @@ export function AuthProvider({ children }) {
         setUser(undefined)
         DeleteTokenFromBD()
         localStorage.removeItem("token")
-
     }
 
     function requestUserBasicInfo(accessToken, refreshToken) {
@@ -60,12 +57,7 @@ export function AuthProvider({ children }) {
         const requestData = {};
         const callBackGetUserBasicInfo = (data) => {
             if (data.statusCode === 200) {
-                console.log("basic info");
-                console.log(data)
-                console.log(accessToken, refreshToken);
-
                 saveSessionInfo(data.data[0][0], accessToken, refreshToken)
-                console.log("logueado");
             }
         }
         const errorCallBackFunctionGetUserBasicInfo = () => { }
@@ -84,8 +76,6 @@ export function AuthProvider({ children }) {
         const callBackREquestNewAccessToken = (data) => {
             if (data.statusCode === 200) {
                 const newAccessToken = data.accessToken
-                console.log("new access token " + newAccessToken);
-
                 requestUserBasicInfo(newAccessToken, refreshToken)
             }
         }
@@ -110,11 +100,8 @@ export function AuthProvider({ children }) {
 
     function checkAuth() {
         if (accessToken) {
-            console.log("si hay");
-
             requestUserBasicInfo(accessToken, getRefreshToken())
         } else {
-            console.log("no hay");
             const token = getRefreshToken();
             console.log(token)
             if (token) {

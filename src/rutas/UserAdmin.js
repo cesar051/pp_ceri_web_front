@@ -1,5 +1,4 @@
 import { Outlet, Navigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { useAuth } from "../auth/AuthProvider";
 
 const UserAdmin = () => {

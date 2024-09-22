@@ -12,7 +12,7 @@ export function queryGET(url, callBackFunction) {
         });
 }
 
-export function queryWithBody(url, requestData, callBackFunction, errorCallBackFunction, authParams, method) {
+export function queryWithBody(url, requestData, callBackFunction, errorCallBackFunction, authParams, method, catchCallBackFunction) {
 
     // Opciones para la petición
     const requestOptions = {
@@ -38,6 +38,9 @@ export function queryWithBody(url, requestData, callBackFunction, errorCallBackF
         })
         .then(data => callBackFunction(data))
         .catch(error => {
+            if (catchCallBackFunction) {
+                catchCallBackFunction()
+            }
             console.error('Error:', error);
             // Aquí puedes manejar el error como desees
         });

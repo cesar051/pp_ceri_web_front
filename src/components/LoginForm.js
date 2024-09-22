@@ -6,7 +6,6 @@ import { queryGET } from '../helpers/queryCall';
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const baseUrl = "http://localhost:5000/";
   const navigate = useNavigate();
   const auth = useAuth();
   const emailAndPasswordValid = () => {
@@ -14,24 +13,19 @@ const LoginForm = () => {
   }
 
   useEffect(() => {
-    console.log("pagina login")
-    console.log("autenticado " + auth.isAuthenticated);
     if (auth.isAuthenticated) {
       navigate("/my/home");
     }
   }, [])
 
   useEffect(() => {
-    console.log("pagina login")
-    console.log("autenticado " + auth.isAuthenticated);
     if (auth.isAuthenticated) {
       navigate("/my/home");
     }
   }, [auth.isAuthenticated])
 
   const loginQueryCallback = (result) => {
-    console.log(result)
-    console.log("llega")
+
     if (result) {
 
       if (result.statusCode === 200) {
@@ -39,9 +33,7 @@ const LoginForm = () => {
 
           auth.saveUser(result)
           navigate("/my/home");
-          console.log(result);
 
-          console.log("logueado")
         } else {
           console.log("not enough parameters")
           //setLoginSuccessful(false);
@@ -57,13 +49,9 @@ const LoginForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Aquí realizarías la lógica para enviar los datos al servidor
-    console.log('Email:', email);
-    console.log('Password:', password);
-
     if (emailAndPasswordValid()) {
 
-      const url = `${baseUrl}userLogin?userEmail=${encodeURIComponent(email)}&userPassword=${encodeURIComponent(password)}`;
+      const url = `${process.env.REACT_APP_API_URL}/userLogin?userEmail=${encodeURIComponent(email)}&userPassword=${encodeURIComponent(password)}`;
       queryGET(url, loginQueryCallback)
 
     }

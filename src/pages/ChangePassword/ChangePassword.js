@@ -47,11 +47,13 @@ const ChangePassword = () => {
             "password": password
         }
         const callBackGetUserBasicInfo = (data) => {
+            console.log(data);
+
             if (data.statusCode === 200) {
                 console.log("enviado");
                 toast.success("Se ha cambiado exitosamente")
                 navigate("/");
-            } else if (data.statusCode === 400 && data.message === "invalid code") {
+            } else if (data.statusCode === 400 && data.msg === "invalid code") {
                 toast.warn("Verifique el codigo ")
                 handleSectionChange("section2")
             } else {
