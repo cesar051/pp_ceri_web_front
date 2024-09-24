@@ -99,7 +99,7 @@ const SignUpForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <div className="form-group">
-                <label htmlFor="name">name</label>
+                <label htmlFor="name">Nombre o Razon Social</label>
                 <input type="name" className="form-control"
                     id="name" placeholder="" name="name" value={formData.name} onChange={(e) => handleInputChange(e)} />
             </div>
@@ -114,7 +114,7 @@ const SignUpForm = () => {
                     id="nit" placeholder="Ingrese su NIT" name="nit" value={formData.nit} onChange={(e) => handleInputChange(e)} />
             </div>
             <div className="form-group">
-                <label htmlFor="numero">Numero</label>
+                <label htmlFor="numero">Celular</label>
                 <input type="number" className="form-control"
                     id="numero" placeholder="3158654798" name="numero" value={formData.numero} onChange={(e) => handleInputChange(e)} />
             </div>

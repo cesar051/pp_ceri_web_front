@@ -1,0 +1,35 @@
+nav ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav li {
+  margin: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  padding: 10px; /* Adjust padding as needed */
+}
+.accordion accordion-flush {
+  border: 2px solid #000;
+  border-radius: 5px;
+  padding: 10px; /* Add padding for spacing inside the div */
+}
+
+.layout {
+  width: 100%;
+
+  display: grid;
+  grid:
+    
+    "main" 1fr
+    
+    / 1fr;
+  gap: 8px;
+}
+
+.main { grid-area: main; }
