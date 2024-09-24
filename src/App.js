@@ -17,6 +17,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Users from './pages/Users/Users';
 import UserAdmin from './rutas/UserAdmin';
 import ChangePassword from './pages/ChangePassword/ChangePassword';
+import UploadReteIVA from './pages/UploadReteIVA/UploadReteIVA';
 
 const router = createBrowserRouter([
   {
@@ -51,7 +52,10 @@ const router = createBrowserRouter([
             path: "/admin/users",
             element: <Users />
           },
-
+          {
+            path: "/admin/upload",
+            element: <UploadReteIVA />
+          },
         ]
       }
     ]

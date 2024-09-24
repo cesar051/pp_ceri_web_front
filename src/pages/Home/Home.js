@@ -16,6 +16,7 @@ const Home = () => {
                     Salir
                 </button>
                 <Link to="/admin/users">admin users</Link>
+                <Link to="/admin/upload">admin subir iva</Link>
             </div>
         </>
     );
