@@ -14,12 +14,13 @@ code {
 footer {
   
   background-size: cover;
-  color: #03031d; /* Color de texto  pie de pagina negro */
+  color: #07072a; /* Color de texto  pie de pagina negro */
   text-align: center;
   padding: 10px;
+  
 }
  body {
-  background: #f7f5f5;
+  background: #fbfafa;
   -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
   box-shadow: inset 0 0 100px rgba(0,0,0,.5);
   height: 100%;
