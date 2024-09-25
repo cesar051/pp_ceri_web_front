@@ -12,7 +12,7 @@ const ChangePasswordsection = (props) => {
                         id="password" placeholder="Contraseña" name="password" value={props.password} onChange={(e) => props.setPassword(e.target.value)} />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="passwordValidation">Contraseña</label>
+                    <label htmlFor="passwordValidation">Repita Su Contraseña</label>
                     <input type="password" className="form-control"
                         id="passwordValidation" placeholder="Repita su contraseña" name="passwordValidation" value={props.passwordValidation} onChange={(e) => props.setPasswordValidation(e.target.value)} />
                 </div>

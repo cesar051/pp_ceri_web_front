@@ -21,7 +21,7 @@ const LandingPage = () => {
                     <div className="App">
 
 
-                        <div className="title-container">
+                        <div className="title-containerLanding">
                             <SectionHeader
                                 title="Bienvenido" subtitle="Al Portal de proveedores de Almacenes Máximo" />
 
