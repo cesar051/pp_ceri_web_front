@@ -114,7 +114,7 @@ const SignUpForm = () => {
                     id="nit" placeholder="Ingrese su NIT" name="nit" value={formData.nit} onChange={(e) => handleInputChange(e)} />
             </div>
             <div className="form-group">
-                <label htmlFor="numero">Numero</label>
+                <label htmlFor="numero">Numero de contacto</label>
                 <input type="number" className="form-control"
                     id="numero" placeholder="3158654798" name="numero" value={formData.numero} onChange={(e) => handleInputChange(e)} />
             </div>
