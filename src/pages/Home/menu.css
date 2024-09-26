@@ -104,3 +104,13 @@ nav a {
 .leftColumnContainer {
   max-width: 200px;
 }
+
+.leftMenuMain .accordion-body {
+  padding-right: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.leftMenuMain .accordion-item {
+  border: 0;
+}
