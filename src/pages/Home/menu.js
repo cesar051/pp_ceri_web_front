@@ -2,8 +2,9 @@
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useAuth } from "../../auth/AuthProvider";
+import { Link } from "react-router-dom";
 
-const menu = ({ auth }) => {
+const menu = ({ auth, handleSignOut }) => {
   const handleIVAClick = () => {
     console.log('Hiciste clic en IVA');
     // Aquí puedes agregar lógica adicional, como redireccionar a otra página
@@ -37,7 +38,11 @@ const menu = ({ auth }) => {
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
 
           <div className="navbar-nav ms-auto">
-            {auth.getUser().perfil === "1" && (< a className="nav-link active" aria-current="page" href="#">Usuarios</a>)}
+            {auth.getUser().perfil === "1" && (
+              <Link to="/admin/users">
+                <div className="nav-link active" aria-current="page" >Usuarios</div>
+              </Link>
+            )}
             <a className="nav-link" href="#">Certificados
               <ul className="submenu">
                 <li><span onClick={handleIVAClick}>IVA</span></li>
@@ -45,7 +50,7 @@ const menu = ({ auth }) => {
                 <li><span onClick={handleRTFClick}>RTF</span></li>
               </ul>
             </a>
-            <a className="nav-link" href="#">Salir</a>
+            <a className="nav-link" onClick={handleSignOut} >Salir</a>
 
           </div>
         </div>

@@ -18,6 +18,8 @@ import Users from './pages/Users/Users';
 import UserAdmin from './rutas/UserAdmin';
 import ChangePassword from './pages/ChangePassword/ChangePassword';
 import UploadReteIVA from './pages/UploadReteIVA/UploadReteIVA';
+import Dashboard from './pages/DashBoard/DashBoard';
+import ExportCertificate from './pages/Export/ExportCertificate';
 
 const router = createBrowserRouter([
   {
@@ -42,7 +44,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/my/home",
-        element: <Home></Home>
+        element: <Home renderElement={<Dashboard />}></Home>
+      },
+      {
+        path: "/my/home/export",
+        element: <Home renderElement={<ExportCertificate />}></Home>
       },
       {
         path: "/admin",
@@ -50,11 +56,11 @@ const router = createBrowserRouter([
         children: [
           {
             path: "/admin/users",
-            element: <Users />
+            element: <Home renderElement={<Users />}></Home>
           },
           {
             path: "/admin/upload",
-            element: <UploadReteIVA />
+            element: <Home renderElement={<UploadReteIVA />}></Home>
           },
         ]
       }

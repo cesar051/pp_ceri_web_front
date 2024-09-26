@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../auth/AuthProvider";
-import Menu_left_home from './menu_left_home';
+import Menu_left_home from './Menu_left_home';
 import Menu from './menu';
 import './menu.css';
 
-const Home = () => {
+const Home = ({ renderElement }) => {
     const auth = useAuth();
     const handleSignOut = () => {
         console.log("saliendo")
@@ -15,26 +15,17 @@ const Home = () => {
     return (
         <>
             <div className="col">
-                <Menu auth={auth} />
+                <Menu auth={auth} handleSignOut={handleSignOut} />
             </div>
             <div className="container text-center">
                 <div className="row align-items-start">
                     <div className="col leftColumnContainer">
-                        <Menu_left_home />
+                        <Menu_left_home auth={auth} />
                     </div>
                     <div className="col">
-                        One of two columns
+                        {renderElement}
                     </div>
                 </div>
-            </div>
-
-            <div>
-                esto es un home
-                <button onClick={handleSignOut}>
-                    Salir
-                </button>
-                <Link to="/admin/users">admin users</Link>
-                <Link to="/admin/upload">admin subir iva</Link>
             </div>
         </>
     );
