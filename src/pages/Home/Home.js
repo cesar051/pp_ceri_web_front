@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../auth/AuthProvider";
 import Menu_left_home from './menu_left_home';
 import Menu from './menu';
+import './menu.css';
 
 const Home = () => {
     const auth = useAuth();
@@ -10,23 +11,22 @@ const Home = () => {
         console.log("saliendo")
         auth.signOut()
     };
+
     return (
         <>
-         <div className="col">
-    <Menu />
-    </div>
-   <div className="container text-center">
-  <div className="row align-items-start">
-    <div className="col">
-    <Menu_left_home />
-    </div>
-    <div className="col">
-      One of two columns
-    </div>
-    </div>
-</div>
-
-
+            <div className="col">
+                <Menu auth={auth} />
+            </div>
+            <div className="container text-center">
+                <div className="row align-items-start">
+                    <div className="col leftColumnContainer">
+                        <Menu_left_home />
+                    </div>
+                    <div className="col">
+                        One of two columns
+                    </div>
+                </div>
+            </div>
 
             <div>
                 esto es un home
