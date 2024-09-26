@@ -4,7 +4,7 @@ const RequestOTPsection = (props) => {
 
     return (
         <>
-            <div>
+            <div className="containerdasboard">
 
                 <div className="form-group">
                     <label htmlFor="email">Email</label>

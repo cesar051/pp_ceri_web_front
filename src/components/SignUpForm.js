@@ -99,7 +99,7 @@ const SignUpForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <div className="form-group">
-                <label htmlFor="name">name</label>
+                <label htmlFor="name">Nombre o Razon Social</label>
                 <input type="name" className="form-control"
                     id="name" placeholder="" name="name" value={formData.name} onChange={(e) => handleInputChange(e)} />
             </div>
@@ -114,15 +114,11 @@ const SignUpForm = () => {
                     id="nit" placeholder="Ingrese su NIT" name="nit" value={formData.nit} onChange={(e) => handleInputChange(e)} />
             </div>
             <div className="form-group">
-                <label htmlFor="numero">Numero</label>
+                <label htmlFor="numero">Numero de contacto</label>
                 <input type="number" className="form-control"
                     id="numero" placeholder="3158654798" name="numero" value={formData.numero} onChange={(e) => handleInputChange(e)} />
             </div>
-            <div className="form-group">
-                <label htmlFor="fechaNacimiento">Fecha de Nacimiento</label>
-                <input type="date" className="form-control"
-                    id="fechaNacimiento" placeholder="" name="fechaNacimiento" value={formData.fechaNacimiento} onChange={(e) => handleInputChange(e)} />
-            </div>
+           
             <div className="form-group">
                 <label htmlFor="password">Contraseña</label>
 
@@ -130,7 +126,7 @@ const SignUpForm = () => {
                     id="password" placeholder="Contraseña" name="password" value={formData.password} onChange={(e) => handleInputChange(e)} />
             </div>
             <div className="form-group">
-                <label htmlFor="passwordValidation">Contraseña</label>
+                <label htmlFor="passwordValidation">Repetir Contraseña</label>
                 <input type="password" className="form-control"
                     id="passwordValidation" placeholder="Repita su contraseña" name="passwordValidation" value={formData.passwordValidation} onChange={(e) => handleInputChange(e)} />
             </div>
