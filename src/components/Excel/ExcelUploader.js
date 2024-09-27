@@ -17,7 +17,7 @@ const ExcelUploader = ({ handleFileUpload, fileName, excelData, handleSubmit }) 
             <ExcelViewer excelData={excelData} />
 
             <Button onClick={handleSubmit} disabled={!excelData} className="mt-3">
-                Subir a la base de datos
+               Guardar
             </Button>
         </Container>
     );

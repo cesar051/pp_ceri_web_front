@@ -1,4 +1,5 @@
 import React from "react";
+import './Changepassword.css';
 
 const RequestOTPsection = (props) => {
 

@@ -37,7 +37,7 @@ const Menu_left_home = ({ auth }) => {
         <div className="main">
           <Accordion defaultActiveKey="0" flush className='leftMenuMain'>
             <Accordion.Item eventKey="1">
-              <Accordion.Header>Certificados</Accordion.Header>
+              <Accordion.Header>Certificados Tributarios</Accordion.Header>
               <Accordion.Body>
                 <Accordion /*defaultActiveKey="0"*/ flush>
                   {/* Opción Importar */}
@@ -92,6 +92,24 @@ const Menu_left_home = ({ auth }) => {
                   </Accordion.Item>
                 </Accordion>
               </Accordion.Body>
+            </Accordion.Item>
+             <Accordion.Item eventKey="2">
+              <Accordion.Header>Manual De usuario</Accordion.Header>
+               <Accordion.Body>
+                ver
+               </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="3">
+              <Accordion.Header>Soporte</Accordion.Header>
+              <Accordion.Body>
+                Contacto
+               </Accordion.Body>
+            </Accordion.Item>
+             <Accordion.Item eventKey="4">
+              <Accordion.Header>Politicas de uso</Accordion.Header>
+               <Accordion.Body>
+                Regulacion
+               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
 
