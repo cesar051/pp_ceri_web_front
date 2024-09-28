@@ -13,83 +13,144 @@ export const USER_STATES = {
 
 export const requiredColumnsUploadIVA = {
     "id_empresa": {
+        mandatory: false,
+        default_value: -1,
         null: false,
         type: "NUMERIC",
-        length: [20, 0]
+        length: [20, 0],
+        optional_names: ['idEmpresa', 'id-empresa']
     },
     "nit": {
+        mandatory: true,
         null: false,
         type: "VARCHAR",
-        length: 60
+        length: 60,
+        optional_names: []
     },
     "cuenta": {
+        mandatory: true,
         null: true,
         type: "VARCHAR",
-        length: 60
+        length: 60,
+        optional_names: []
     },
-    "nombre": {
+    "descripcion": {
+        mandatory: true,
         null: true,
         type: "VARCHAR",
-        length: 300
+        length: 300,
+        optional_names: ['nombre']
     },
     "concepto": {
+        mandatory: true,
         null: true,
         type: "VARCHAR",
-        length: 20
+        length: 40,
+        optional_names: []
     },
     "porcentaje": {
+        mandatory: true,
         null: false,
         type: "NUMERIC",
-        length: [3, 0]
+        length: [5, 2],
+        optional_names: [],
+        cast: (num) => +(Math.round(num + `e2`) + `e-2`)
     },
     "base": {
+        mandatory: true,
         null: false,
         type: "NUMERIC",
-        length: [14, 2]
-    },
-    "iva": {
-        null: false,
-        type: "NUMERIC",
-        length: [14, 2]
+        length: [14, 2],
+        optional_names: [],
+        cast: (num) => +(Math.round(num + `e2`) + `e-2`)
     },
     "retenido": {
+        mandatory: true,
         null: false,
         type: "NUMERIC",
-        length: [14, 2]
+        length: [14, 2],
+        optional_names: [],
+        cast: (num) => +(Math.round(num + `e2`) + `e-2`)
     },
-    "año": {
+    "year": {
+        mandatory: true,
         null: false,
         type: "NUMERIC",
-        length: [4, 0]
+        length: [4, 0],
+        optional_names: ['ano', 'año']
     },
     "periodo": {
+        mandatory: true,
         null: false,
         type: "NUMERIC",
-        length: [2, 0]
+        length: [2, 0],
+        optional_names: []
     },
     "ciudad_pago": {
+        mandatory: true,
         null: true,
         type: "VARCHAR",
-        length: 30
+        length: 30,
+        optional_names: ['ciudad-pago']
     },
     "ciudad_expedido": {
+        mandatory: true,
         null: true,
         type: "VARCHAR",
-        length: 30
+        length: 30,
+        optional_names: ['ciudad-expedido']
     },
     "banco_pago": {
+        mandatory: true,
         null: true,
         type: "NUMERIC",
-        length: [6, 0]
+        length: [6, 0],
+        optional_names: ['banco_pago']
     },
-    "ind_iva": {
+    "indicador_impuesto": {
+        mandatory: true,
         null: true,
         type: "NUMERIC",
-        length: [6, 0]
+        length: [6, 0],
+        optional_names: ['ind-iva', 'ind_ica', 'indrfte', 'ind_iva']
     },
-    "fecha-expedicion": {
+    "fecha_expedicion": {
+        mandatory: true,
         null: true,
         type: "DATE",
-        length: 0
+        length: 0,
+        optional_names: ['fecha-expedicion'],
+        cast: (date) => (Number.isInteger(date) ? new Date(1899, 11, 30 + date).toLocaleDateString() : date)
     }
 };
+
+export const AVAILABLE_YEARS_FOR_EXPORT = [
+    {
+        value: "2024",
+        label: "2024"
+    },
+    {
+        value: "2023",
+        label: "2023"
+    },
+    {
+        value: "2022",
+        label: "2022"
+    },
+    {
+        value: "2021",
+        label: "2021"
+    },
+]
+
+export const AVAILABLE_PERIODS_FOR_EXPORT = [
+    {
+        value: "1",
+        label: "1"
+    },
+    {
+        value: "2",
+        label: "2"
+    },
+
+]
