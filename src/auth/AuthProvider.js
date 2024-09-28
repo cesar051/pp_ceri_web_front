@@ -76,6 +76,9 @@ export function AuthProvider({ children }) {
         const callBackREquestNewAccessToken = (data) => {
             if (data.statusCode === 200) {
                 const newAccessToken = data.accessToken
+                console.log("accesss token");
+                console.log(data.accessToken);
+
                 requestUserBasicInfo(newAccessToken, refreshToken)
             }
         }
