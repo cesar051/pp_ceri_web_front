@@ -9,6 +9,16 @@ import { queryWithBody } from "../../helpers/queryCall";
 
 const UploadReteIVA = () => {
 
+    const convertKeysToLowerCaseAndRemoveSpaces = (array) => {
+        return array.map(obj => {
+            return Object.keys(obj).reduce((acc, key) => {
+                const cleanedKey = key.trim().toLowerCase().replace(/\s+/g, ''); // Quita espacios y convierte a minúsculas
+                acc[cleanedKey] = obj[key]; // Añadir la clave ajustada y su valor
+                return acc;
+            }, {});
+        });
+    };
+
     const [excelData, setExcelData] = useState(null);
     const [fileName, setFileName] = useState("");
 
@@ -20,6 +30,13 @@ const UploadReteIVA = () => {
 
     const handleFileUpload = (e) => {
         const file = e.target.files[0];
+
+        if (!file || !file.name) {
+            setExcelData(null)
+            toast.warn("ha ocurrido un error, por favor recargue la página")
+            return
+        }
+
         setFileName(file.name);
 
         const reader = new FileReader();
@@ -30,16 +47,14 @@ const UploadReteIVA = () => {
             const sheetName = workbook.SheetNames[0]; // Obtiene la primera hoja
             const sheet = workbook.Sheets[sheetName];
             const jsonData = XLSX.utils.sheet_to_json(sheet); // Convierte la hoja a JSON
-            if (ExcelDataValidator(jsonData, requiredColumnsUploadIVA)) {
-
-                jsonData.forEach((item) => { // pasar cada fecha de excel ej 45352 a fecha '1/03/2024'
-                    item["fecha-expedicion"] = castDate(item["fecha-expedicion"])
-                })
-
-                setExcelData(jsonData); // Guarda los datos para renderizarlos y luego enviarlos
+            const jsonDataFormated = convertKeysToLowerCaseAndRemoveSpaces(jsonData);
+            console.log(jsonDataFormated);
+            if (ExcelDataValidator(jsonDataFormated, requiredColumnsUploadIVA)) {
+                setExcelData(jsonDataFormated); // Guarda los datos para renderizarlos y luego enviarlos
             } else {
                 console.log("data no valida");
                 toast.warn("Los campos del archivo no coinciden con los esperados")
+                setExcelData(null)
             }
         };
 

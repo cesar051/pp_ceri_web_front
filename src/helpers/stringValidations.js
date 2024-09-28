@@ -95,6 +95,7 @@ export function isVarchar(params) {
 }
 
 export function isValidDate(params) {
+
     let date
     // Verificar si es una cadena
     if (typeof params.value !== 'string') {
@@ -103,7 +104,12 @@ export function isValidDate(params) {
         } else {
             return false; // No es válido si no es una cadena
         }
-    } else {
+    } else { // si es un string
+        const regex = /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[0-2])\/\d{4}$/; // reconoce fechas en el formato dd/mm/yyyy
+        if (regex.test(params.value)) {
+            const [day, month, year] = params.value.split("/");
+            params.value = `${year}-${month}-${day}`;
+        }
         date = new Date(params.value);
     }
 
