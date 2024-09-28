@@ -1,0 +1,40 @@
+h2 {
+
+    text-align: center; /* Center the heading */
+    margin-bottom: 20px; /* Add space below the heading */
+    font-size: 20px; /* Adjust the font size as needed */
+    
+  }
+  
+  input[type="file"] {
+    display: block; /* Make the file input block-level */
+    margin: 0 auto; /* Center the input horizontally */
+    padding: 10px; /* Add padding for a more modern look */
+    border: 1px solid #ccc; /* Add a border */
+    border-radius: 4px; /* Add rounded corners */
+  }
+  
+  p {
+    text-align: center; /* Center the file name display */
+    margin-top: 10px; /* Add space above the file name */
+  }
+    .mt-3:hover {
+      background-color: #0069d9;
+      /* Change the background color on hover */
+    }
+        .mt-3 {
+          cursor: pointer;
+          /* Change the mouse pointer to a hand on hover */
+          background-color: #007bff;
+          /* Set the button background color */
+          color: #fff;
+          /* Set the button text color */
+          border: none;
+          /* Remove the default button border */
+          padding: 10px 20px;
+          /* Add padding for a larger button */
+          border-radius: 5px;
+          /* Add rounded corners */
+          font-size: 16px;
+          /* Adjust the font size as needed */
+        }

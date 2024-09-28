@@ -7,6 +7,7 @@ import { ExcelDataValidator } from '../../helpers/ExcelFunctions/ExcelDataValida
 import { toast } from 'react-toastify';
 import { queryWithBody } from '../../helpers/queryCall';
 import { useAuth } from '../../auth/AuthProvider';
+import  './ExcelFileInput.css';
 
 const ExcelUploader = ({ handleFileUpload, fileName, excelData, handleSubmit }) => {
 
@@ -17,7 +18,7 @@ const ExcelUploader = ({ handleFileUpload, fileName, excelData, handleSubmit }) 
             <ExcelViewer excelData={excelData} />
 
             <Button onClick={handleSubmit} disabled={!excelData} className="mt-3">
-                Subir a la base de datos
+               Guardar
             </Button>
         </Container>
     );

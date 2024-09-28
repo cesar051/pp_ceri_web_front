@@ -1,10 +1,12 @@
 import React from 'react';
+import  './ExcelFileInput.css';
+
 
 const ExcelFileInput = ({ handleFileUpload, fileName }) => {
 
     return (
         <>
-            <h2>Subir archivo Excel</h2>
+            <h2>Importar archivo Excel   .xls</h2>
             <input
                 type="file"
                 accept=".xlsx, .xls"
