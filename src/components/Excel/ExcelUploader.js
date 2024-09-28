@@ -7,6 +7,7 @@ import { ExcelDataValidator } from '../../helpers/ExcelFunctions/ExcelDataValida
 import { toast } from 'react-toastify';
 import { queryWithBody } from '../../helpers/queryCall';
 import { useAuth } from '../../auth/AuthProvider';
+import  './ExcelFileInput.css';
 
 const ExcelUploader = ({ handleFileUpload, fileName, excelData, handleSubmit }) => {
 

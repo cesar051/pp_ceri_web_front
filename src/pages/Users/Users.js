@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { useAuth } from "../../auth/AuthProvider";
 import FirstRowUsersTable from "./FirstRowUsersTable";
 import BodyUsersTable from "./BodyUsersTable";
+import './UserFilter.css';
 
 const Users = () => {
 
