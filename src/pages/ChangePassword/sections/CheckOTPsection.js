@@ -1,10 +1,11 @@
 import React from "react";
+import './Changepassword.css';
 
 const CheckOTPsection = (props) => {
 
     return (
         <>
-            <div>
+            <div className="form-group1">
                 <div className="form-group">
                     <label htmlFor="codigo">Ingrese el codigo de 6 digitos que le enviamos al correo</label>
                     <input type="number" className="form-control"

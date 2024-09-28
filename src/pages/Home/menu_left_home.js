@@ -37,7 +37,7 @@ const Menu_left_home = ({ auth }) => {
         <div className="main">
           <Accordion defaultActiveKey="0" flush className='leftMenuMain'>
             <Accordion.Item eventKey="1">
-              <Accordion.Header>Certificados</Accordion.Header>
+              <Accordion.Header>Certificados Tributarios</Accordion.Header>
               <Accordion.Body>
                 <Accordion /*defaultActiveKey="0"*/ flush>
                   {/* Opción Importar */}
@@ -51,7 +51,7 @@ const Menu_left_home = ({ auth }) => {
                     </Accordion.Item> : ""}
 
                   {/* Opción Exportar (desplegable) */}
-                  <Accordion.Item eventKey="1">
+                  <Accordion.Item eventKey="2">
                     <Accordion.Header>Exportar</Accordion.Header>
                     <Accordion.Body>
                       {/* Aquí las opciones con apariencia de acordeón pero sin desplegar */}
@@ -92,6 +92,24 @@ const Menu_left_home = ({ auth }) => {
                   </Accordion.Item>
                 </Accordion>
               </Accordion.Body>
+            </Accordion.Item>
+             <Accordion.Item eventKey="3">
+              <Accordion.Header>Manual de usuario</Accordion.Header>
+              <Accordion.Body>
+               <Accordion.Header className='no-accordeon'>Detalle</Accordion.Header>
+               </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="4">
+              <Accordion.Header>Soporte</Accordion.Header>
+              <Accordion.Body>
+               <Accordion.Header className='no-accordeon'>Contacto</Accordion.Header>
+               </Accordion.Body>
+            </Accordion.Item>
+              <Accordion.Item eventKey="5">
+              <Accordion.Header>Politicas de Uso</Accordion.Header>
+              <Accordion.Body>
+               <Accordion.Header className='no-accordeon'>Regulacion</Accordion.Header>
+               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
 

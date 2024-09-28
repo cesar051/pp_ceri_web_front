@@ -36,12 +36,13 @@
 }
 
 .brand-wrapper {
-  background-color: #ffffff; /* Fondo gris claro */
+  background-color: #fcfbfcfe; /* Fondo gris claro */
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(192, 53, 53, 0.1);
+  box-shadow: 0 2px 4px rgba(58, 12, 226, 0.1);
   color: rgb(11, 11, 11);
   font-size: calc(3px + 2vmin);
+  
 }
 
 .panel-heading {
@@ -60,6 +61,31 @@
   grid-template-rows: auto 1fr; /* La primera fila tiene altura automática, la segunda ocupa el resto */
   height: 50vh;
 }
+
+
+
+.dashboard {
+  display: flex;
+  min-height: 100vh; /* Occupy the full viewport height */
+}
+
+.left-column-container {
+  width: 200px; /* Adjust the width as needed */
+  background-color: #f0f0f0; /* Change background color if desired */
+  padding: 20px;
+}
+
+.main-content {
+  flex: 1; /* Take up the remaining space */
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .left-column-container {
+    display: none; /* Hide the left column on small screens */
+  }
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

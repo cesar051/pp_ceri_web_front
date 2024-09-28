@@ -1,10 +1,11 @@
 import React from "react";
+import './Changepassword.css';
 
 const ChangePasswordsection = (props) => {
 
     return (
         <>
-            <div>
+            <div className="form-group1">
                 <div className="form-group">
                     <label htmlFor="password">Contraseña</label>
 

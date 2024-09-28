@@ -43,14 +43,10 @@ const menu = ({ auth, handleSignOut }) => {
                 <div className="nav-link active" aria-current="page" >Usuarios</div>
               </Link>
             )}
-            <a className="nav-link" href="#">Certificados
-              <ul className="submenu">
-                <li><span onClick={handleIVAClick}>IVA</span></li>
-                <li><span onClick={handleICAClick}>ICA</span></li>
-                <li><span onClick={handleRTFClick}>RTF</span></li>
-              </ul>
-            </a>
-            <a className="nav-link" onClick={handleSignOut} >Salir</a>
+            
+             <Link to="/">
+                <div className="nav-link active" aria-current="page" >Salir</div>
+              </Link>
 
           </div>
         </div>
