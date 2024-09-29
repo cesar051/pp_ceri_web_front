@@ -3,22 +3,34 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useLocation } from 'react-router-dom';
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
-import { AVAILABLE_YEARS_FOR_EXPORT, AVAILABLE_PERIODS_FOR_EXPORT } from "../../constants";
+import { AVAILABLE_YEARS_FOR_EXPORT, AVAILABLE_PERIODS_FOR_EXPORT, COMPANY_INFO } from "../../constants";
 import { useAuth } from "../../auth/AuthProvider";
 
-export function generatePDF() {
+export function generatePDF(data) {
+
+    const moneyFormater = new Intl.NumberFormat('es-CO', { minimumFractionDigits: 0 })//new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'COP' });
+
+    const getCurrentDate = () => {
+        return new Date().toLocaleDateString('es-ES').replace(/\//g, '.');
+    }
+
+    const valuesDBConcepto = {
+        'iva': 'reteiva',
+        'ica': 'reteica',
+        'rtf': 'retefte'
+    }
 
     const cellValues = {
-        '0,6': ['Fecha de Expedición (Dia.mes.año)', '15.03.2024'],
-        '1,6': ['Año fiscal', '2024'],
-        '2,0': ['Ciudad donde se consignó la retención', 'Bogotá, D.C.'],
-        '3,0': ['Nombre o Razón Social a quien se le practica la retención', 'LABORATORIOS DERMANET S.A.S.'],
-        '3,6': ['CC o NIT', '800082633'],
-        '4,0': ['Razón Social completa', 'ALMACENES MAXIMO S.A.S.'],
-        '4,6': ['CC o NIT', '800082633'],
-        '5,0': ['Dirección del agente retenedor', 'Carrera 106 No.15A'],
-        '5,4': ['Municipio', 'Bogotá'],
-        '5,6': ['Departamento', 'Cundinamarca'],
+        '0,6': ['Fecha de Expedición (Dia.mes.año)', getCurrentDate()],
+        '1,6': ['Año fiscal', data.year],
+        '2,0': ['Ciudad donde se consignó la retención', data.DBData.ciudad_pago],
+        '3,0': ['Nombre o Razón Social a quien se le practica la retención', data.DBData.descripcion],
+        '3,6': ['CC o NIT', data.nit],
+        '4,0': ['Razón Social completa', COMPANY_INFO.razon_social_completa],
+        '4,6': ['CC o NIT', COMPANY_INFO.nit],
+        '5,0': ['Dirección del agente retenedor', COMPANY_INFO.direccion],
+        '5,4': ['Municipio', COMPANY_INFO.municipio],
+        '5,6': ['Departamento', COMPANY_INFO.departamento],
     }
 
     const doc = new jsPDF();
@@ -28,7 +40,7 @@ export function generatePDF() {
         theme: 'grid',
         body: [
             [{
-                content: 'CERTIFICADO DE RETENCIÓN EN LA FUENTE DE I.V.A',
+                content: `CERTIFICADO DE RETENCIÓN EN LA FUENTE DE ${data.concepto}`.toUpperCase(),
                 colSpan: 6, // Esto hace que la celda ocupe 6 columnas
                 rowSpan: 2,
                 styles: { halign: 'center', valign: 'center', fontStyle: 'bold', fontSize: 12 },
@@ -126,9 +138,9 @@ export function generatePDF() {
                     styles: { halign: 'center', fontSize: 10 },
                 },
                 {
-                    content: `Valor IVA`,
+                    content: `Valor \n${data.concepto}`.toUpperCase(),
                     colSpan: 2, // Ocupa las 6 columnas
-                    styles: { halign: 'center', fontSize: 10, valign: 'center' },
+                    styles: { halign: 'center', fontSize: 10 },
                 },
                 {
                     content: `Valor retenido`,
@@ -140,32 +152,32 @@ export function generatePDF() {
         body: [
 
             [{
-                content: 'reteiva',
+                content: valuesDBConcepto[data.concepto],
                 colSpan: 8, // Esto hace que la celda ocupe 6 columnas
                 styles: { halign: 'left', fontSize: 10 },
             },
             {
-                content: `1`,
+                content: data.periodo,
                 colSpan: 2, // Ocupa las 6 columnas
                 styles: { halign: 'center', fontSize: 10 },
             },
             {
-                content: `15% `,
+                content: `${data.DBData.porcentaje}% `,
                 colSpan: 2, // Ocupa las 6 columnas
                 styles: { halign: 'center', fontSize: 10 },
             },
             {
-                content: `7656767`,
+                content: moneyFormater.format(data.DBData.base),
                 colSpan: 2, // Ocupa las 6 columnas
                 styles: { halign: 'center', fontSize: 10 },
             },
             {
-                content: `323123`,
+                content: moneyFormater.format(data.DBData.retenido),
                 colSpan: 2, // Ocupa las 6 columnas
                 styles: { halign: 'center', fontSize: 10 },
             },
             {
-                content: `2312331`,
+                content: moneyFormater.format(data.DBData.retenido),
                 colSpan: 2, // Ocupa las 6 columnas
                 styles: { halign: 'center', fontSize: 10 },
             }],
@@ -180,19 +192,19 @@ export function generatePDF() {
                 styles: { halign: 'center', fontSize: 10 },
             },
             {
-                content: `7656767`,
+                content: `$${moneyFormater.format(data.DBData.base)}`,
                 colSpan: 2, // Ocupa las 6 columnas
-                styles: { halign: 'center', fontSize: 10 },
+                styles: { halign: 'center', fontSize: 10, fontStyle: 'bold' },
             },
             {
-                content: `323123`,
+                content: `$${moneyFormater.format(data.DBData.retenido)}`,
                 colSpan: 2, // Ocupa las 6 columnas
-                styles: { halign: 'center', fontSize: 10 },
+                styles: { halign: 'center', fontSize: 10, fontStyle: 'bold' },
             },
             {
-                content: `2312331`,
+                content: `$${moneyFormater.format(data.DBData.retenido)}`,
                 colSpan: 2, // Ocupa las 6 columnas
-                //styles: { halign: 'center', fontSize: 10 },
+                styles: { halign: 'center', fontSize: 10, fontStyle: 'bold' },
             }],
             [{
                 content: ' ',
