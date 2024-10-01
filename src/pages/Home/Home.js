@@ -7,7 +7,8 @@ import './menu.css';
 
 const Home = ({ renderElement }) => {
     const auth = useAuth();
-    const handleSignOut = () => {
+    const handleSignOut = (e) => {
+        e.preventDefault();
         console.log("saliendo")
         auth.signOut()
     };

@@ -43,10 +43,10 @@ const menu = ({ auth, handleSignOut }) => {
                 <div className="nav-link active" aria-current="page" >Usuarios</div>
               </Link>
             )}
-            
-             <Link to="/">
-                <div className="nav-link active" aria-current="page" >Salir</div>
-              </Link>
+
+            <Link to="/" onClick={handleSignOut}>
+              <div className="nav-link active" aria-current="page" >Salir</div>
+            </Link>
 
           </div>
         </div>
