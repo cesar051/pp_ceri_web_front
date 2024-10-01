@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useLocation } from 'react-router-dom';
 import { jsPDF } from "jspdf";
@@ -6,6 +6,8 @@ import "jspdf-autotable";
 import { AVAILABLE_YEARS_FOR_EXPORT, AVAILABLE_PERIODS_FOR_EXPORT } from "../../constants";
 import { useAuth } from "../../auth/AuthProvider";
 import { generatePDF } from "./generatePDF";
+import { toast } from "react-toastify";
+import { queryWithBody } from "../../helpers/queryCall";
 
 const ExportCertificate = () => {
 
@@ -20,8 +22,66 @@ const ExportCertificate = () => {
 
     //const generatePDF = () => 
     const getPDFURL = () => {
-        setPdfUrl(generatePDF())
+
+        if (!periodo) {
+            toast.warn("Recuerde llenar periodo")
+            return
+        }
+
+        if (!year) {
+            toast.warn("Recuerde llenar año")
+            return
+        }
+
+        if (!auth || !auth.getUser() || !auth.getUser().nit || !actionExport || !auth.getAccessToken()) {
+            toast.warn("Error interno")
+            return
+        }
+
+        const url = `${process.env.REACT_APP_API_URL}/getCertificateInfo`;
+        const requestData = {
+            nit: auth.getUser().nit,
+            periodo: periodo,
+            year: year,
+            concepto: actionExport
+        };
+
+        const callBackGetCertificateInfo = (data) => {
+            if (data.statusCode === 200) {
+
+                if (data.data.length < 1) {
+                    toast.info("No hay datos para el año y periodo especificados")
+                    return
+                }
+
+                console.log(data);
+                console.log(data.data.length);
+
+                setPdfUrl(generatePDF({
+                    nit: auth.getUser().nit,
+                    periodo: periodo,
+                    year: year,
+                    concepto: actionExport,
+                    DBData: data.data[0]
+                }))
+            }
+        }
+        const errorCallBackFunctionGetUserBasicInfo = () => { }
+        const authParams = {
+            requiereAuthentication: true,
+            token: auth.getAccessToken()
+        }
+
+        queryWithBody(url, requestData, callBackGetCertificateInfo, errorCallBackFunctionGetUserBasicInfo, authParams, 'POST');
+
+        //setPdfUrl(generatePDF())
     }
+
+    useEffect(() => {
+        setPdfUrl(null)
+        setYear('')
+        setPeriodo('')
+    }, [location.state])
 
 
     const handleSubmit = (e) => {
@@ -47,6 +107,7 @@ const ExportCertificate = () => {
                     <div className="form-group">
                         <label htmlFor="year">Año</label>
                         <select id="select" value={year} onChange={(e) => handleYearChange(e)}>
+                            <option value="">Seleccione</option>
                             {AVAILABLE_YEARS_FOR_EXPORT.map((item, index) => (
                                 <option key={index} value={item.value}>{item.label}</option>
                             ))}
@@ -56,6 +117,7 @@ const ExportCertificate = () => {
                     <div className="form-group">
                         <label htmlFor="periodo">Periodo</label>
                         <select id="select" value={periodo} onChange={(e) => handlePeriodoChange(e)}>
+                            <option value="">Seleccione</option>
                             {AVAILABLE_PERIODS_FOR_EXPORT.map((item, index) => (
                                 <option key={index} value={item.value}>{item.label}</option>
                             ))}

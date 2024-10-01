@@ -120,7 +120,7 @@ export const requiredColumnsUploadIVA = {
         type: "DATE",
         length: 0,
         optional_names: ['fecha-expedicion'],
-        cast: (date) => (Number.isInteger(date) ? new Date(1899, 11, 30 + date).toLocaleDateString() : date)
+        cast: (date) => (Number.isInteger(date) ? new Date(1899, 11, 30 + date).toISOString().slice(0, 10) : date)
     }
 };
 
@@ -154,3 +154,11 @@ export const AVAILABLE_PERIODS_FOR_EXPORT = [
     },
 
 ]
+
+export const COMPANY_INFO = {
+    razon_social_completa: 'ALMACENES MAXIMO S.A.S.',
+    nit: '800082633',
+    direccion: 'Carrera 106 No.15A',
+    municipio: 'Bogotá',
+    departamento: 'Cundinamarca'
+}

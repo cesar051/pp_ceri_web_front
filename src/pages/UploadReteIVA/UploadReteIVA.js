@@ -20,6 +20,7 @@ const UploadReteIVA = () => {
     };
 
     const [excelData, setExcelData] = useState(null);
+    const [excelDataDBFormatted, setExcelDataDBFormatted] = useState(null);
     const [fileName, setFileName] = useState("");
 
     const auth = useAuth();
@@ -47,13 +48,16 @@ const UploadReteIVA = () => {
             const sheetName = workbook.SheetNames[0]; // Obtiene la primera hoja
             const sheet = workbook.Sheets[sheetName];
             const jsonData = XLSX.utils.sheet_to_json(sheet); // Convierte la hoja a JSON
+            const jsonDataOriginal = jsonData;
             const jsonDataFormated = convertKeysToLowerCaseAndRemoveSpaces(jsonData);
             console.log(jsonDataFormated);
             if (ExcelDataValidator(jsonDataFormated, requiredColumnsUploadIVA)) {
-                setExcelData(jsonDataFormated); // Guarda los datos para renderizarlos y luego enviarlos
+                setExcelDataDBFormatted(jsonDataFormated)
+                setExcelData(jsonDataOriginal); // Guarda los datos para renderizarlos y luego enviarlos
             } else {
                 console.log("data no valida");
                 toast.warn("Los campos del archivo no coinciden con los esperados")
+                setExcelDataDBFormatted(null)
                 setExcelData(null)
             }
         };
@@ -63,14 +67,14 @@ const UploadReteIVA = () => {
 
 
     const handleSubmit = async () => {
-        if (!excelData) {
+        if (!excelDataDBFormatted) {
             alert('No hay datos para enviar.');
             return;
         }
 
         const url = `${process.env.REACT_APP_API_URL}/uploadDataIVA`;
         const requestData = {
-            jsonData: excelData
+            jsonData: excelDataDBFormatted
         }
         const callBackGetUserBasicInfo = (data) => {
             console.log(data);
