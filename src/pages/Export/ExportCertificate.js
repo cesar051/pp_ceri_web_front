@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useLocation } from 'react-router-dom';
-import { jsPDF } from "jspdf";
 import "jspdf-autotable";
 import { AVAILABLE_YEARS_FOR_EXPORT, AVAILABLE_PERIODS_FOR_EXPORT } from "../../constants";
 import { useAuth } from "../../auth/AuthProvider";
