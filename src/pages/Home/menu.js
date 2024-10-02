@@ -1,28 +1,15 @@
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useAuth } from "../../auth/AuthProvider";
 import { Link } from "react-router-dom";
 
 const menu = ({ auth, handleSignOut }) => {
-  const handleIVAClick = () => {
-    console.log('Hiciste clic en IVA');
-    // Aquí puedes agregar lógica adicional, como redireccionar a otra página
-  };
 
-  const handleICAClick = () => {
-    // ...
-  };
-
-  const handleRTFClick = () => {
-    // ...
-  };
   return (
-
 
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">Portal Proveedores </a>
+        <a className="navbar-brand" href="">Portal Proveedores </a>
         <button
           className="navbar-toggler"
           type="button"
