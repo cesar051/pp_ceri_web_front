@@ -3,7 +3,6 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './menu.css';
 import Accordion from 'react-bootstrap/Accordion';
-import Button from 'react-bootstrap/Button';
 import { Link, useNavigate } from "react-router-dom";
 
 const Menu_left_home = ({ auth }) => {
@@ -93,23 +92,23 @@ const Menu_left_home = ({ auth }) => {
                 </Accordion>
               </Accordion.Body>
             </Accordion.Item>
-             <Accordion.Item eventKey="3">
+            <Accordion.Item eventKey="3">
               <Accordion.Header>Manual de usuario</Accordion.Header>
               <Accordion.Body>
-               <Accordion.Header className='no-accordeon'>Detalle</Accordion.Header>
-               </Accordion.Body>
+                <Accordion.Header className='no-accordeon'>Detalle</Accordion.Header>
+              </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="4">
               <Accordion.Header>Soporte</Accordion.Header>
               <Accordion.Body>
-               <Accordion.Header className='no-accordeon'>Contacto</Accordion.Header>
-               </Accordion.Body>
+                <Accordion.Header className='no-accordeon'>Contacto</Accordion.Header>
+              </Accordion.Body>
             </Accordion.Item>
-              <Accordion.Item eventKey="5">
+            <Accordion.Item eventKey="5">
               <Accordion.Header>Politicas de Uso</Accordion.Header>
               <Accordion.Body>
-               <Accordion.Header className='no-accordeon'>Regulacion</Accordion.Header>
-               </Accordion.Body>
+                <Accordion.Header className='no-accordeon'>Regulacion</Accordion.Header>
+              </Accordion.Body>
             </Accordion.Item>
           </Accordion>
 

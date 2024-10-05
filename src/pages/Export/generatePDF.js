@@ -1,10 +1,7 @@
-import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useLocation } from 'react-router-dom';
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
-import { AVAILABLE_YEARS_FOR_EXPORT, AVAILABLE_PERIODS_FOR_EXPORT, COMPANY_INFO } from "../../constants";
-import { useAuth } from "../../auth/AuthProvider";
+import { COMPANY_INFO } from "../../constants";
 
 export function generatePDF(data) {
 
@@ -119,7 +116,7 @@ export function generatePDF(data) {
             [
                 {
                     content: 'Concepto',
-                    colSpan: 8, // Esto hace que la celda ocupe 6 columnas
+                    colSpan: 4, // Esto hace que la celda ocupe 6 columnas
                     styles: { halign: 'center', fontStyle: 'bold', fontSize: 10, valign: 'center' },
                 },
                 {
@@ -134,17 +131,17 @@ export function generatePDF(data) {
                 },
                 {
                     content: `Monto Total`,
-                    colSpan: 2, // Ocupa las 6 columnas
+                    colSpan: 4, // Ocupa las 6 columnas
                     styles: { halign: 'center', fontSize: 10 },
                 },
                 {
                     content: `Valor \n${data.concepto}`.toUpperCase(),
-                    colSpan: 2, // Ocupa las 6 columnas
+                    colSpan: 3, // Ocupa las 6 columnas
                     styles: { halign: 'center', fontSize: 10 },
                 },
                 {
                     content: `Valor retenido`,
-                    colSpan: 2, // Ocupa las 6 columnas
+                    colSpan: 3, // Ocupa las 6 columnas
                     styles: { halign: 'center', fontSize: 10 },
                 }
             ]
@@ -153,7 +150,7 @@ export function generatePDF(data) {
 
             [{
                 content: valuesDBConcepto[data.concepto],
-                colSpan: 8, // Esto hace que la celda ocupe 6 columnas
+                colSpan: 4, // Esto hace que la celda ocupe 6 columnas
                 styles: { halign: 'left', fontSize: 10 },
             },
             {
@@ -168,22 +165,22 @@ export function generatePDF(data) {
             },
             {
                 content: moneyFormater.format(data.DBData.base),
-                colSpan: 2, // Ocupa las 6 columnas
+                colSpan: 4, // Ocupa las 6 columnas
                 styles: { halign: 'center', fontSize: 10 },
             },
             {
                 content: moneyFormater.format(data.DBData.retenido),
-                colSpan: 2, // Ocupa las 6 columnas
+                colSpan: 3, // Ocupa las 6 columnas
                 styles: { halign: 'center', fontSize: 10 },
             },
             {
                 content: moneyFormater.format(data.DBData.retenido),
-                colSpan: 2, // Ocupa las 6 columnas
+                colSpan: 3, // Ocupa las 6 columnas
                 styles: { halign: 'center', fontSize: 10 },
             }],
             [{
                 content: 'Total',
-                colSpan: 10, // Esto hace que la celda ocupe 6 columnas
+                colSpan: 6, // Esto hace que la celda ocupe 6 columnas
                 styles: { halign: 'left', fontStyle: 'bold', fontSize: 10 },
             },
             {
@@ -193,17 +190,17 @@ export function generatePDF(data) {
             },
             {
                 content: `$${moneyFormater.format(data.DBData.base)}`,
-                colSpan: 2, // Ocupa las 6 columnas
+                colSpan: 4, // Ocupa las 6 columnas
                 styles: { halign: 'center', fontSize: 10, fontStyle: 'bold' },
             },
             {
                 content: `$${moneyFormater.format(data.DBData.retenido)}`,
-                colSpan: 2, // Ocupa las 6 columnas
+                colSpan: 3, // Ocupa las 6 columnas
                 styles: { halign: 'center', fontSize: 10, fontStyle: 'bold' },
             },
             {
                 content: `$${moneyFormater.format(data.DBData.retenido)}`,
-                colSpan: 2, // Ocupa las 6 columnas
+                colSpan: 3, // Ocupa las 6 columnas
                 styles: { halign: 'center', fontSize: 10, fontStyle: 'bold' },
             }],
             [{

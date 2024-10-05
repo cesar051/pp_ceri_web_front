@@ -1,5 +1,5 @@
 .body_col-color {
-    background-color: #f6f7fc; /* Puedes cambiar el color de fondo aquí */
+    background-color: #f0f0f0; /* Puedes cambiar el color de fondo aquí */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -12,6 +12,7 @@
    font-weight: bold;
    margin-bottom: 20px;
  }
+
   /* Estilos adicionales para personalizar aún más */
   .Registro {
     /* Estilos para el contenedor principal del componente Registro */
@@ -33,7 +34,7 @@
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #172330;
+  color: #495057;
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #d9ceda;
@@ -42,7 +43,7 @@
 }
 .btn-primary {
   color: #fff;
-  background-color: #0a77f4;
+  background-color: #007bff;
   
 
   padding: 0.5rem 1rem;
@@ -52,22 +53,3 @@
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,   
  border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-
-.form {
-  display: flex; /* Make the form elements arrange vertically */
-  flex-direction: column; /* Stack them on top of each other */
-  width: fit-content; /* Adjust the width as needed */
-  margin: 0 auto; /* Center the form horizontally */
-  padding: 20px; /* Add some padding for spacing */
-}
-
-.form-group {
-  margin-bottom: 15px; /* Add spacing between form groups */
-}
-
-.form-control {
-  padding: 10px; /* Adjust padding for input fields */
-  border: 1px solid #ccc; /* Add a border to the input fields */
-  border-radius: 4px; /* Add rounded corners */
-}
-
