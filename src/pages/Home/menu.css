@@ -1,0 +1,181 @@
+nav ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav li {
+  margin: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  padding: 10px;
+  /* Adjust padding as needed */
+}
+
+
+.layout {
+  width: 100%;
+
+  display: grid;
+  grid:
+
+    "main" 1fr / 1fr;
+  gap: 8px;
+}
+
+/* Add your custom styles here. For example: */
+.navbar {
+  border-bottom: 1px solid #fffefe;
+}
+
+.navbar-brand {
+  font-weight: bold;
+}
+
+.navbar-nav .nav-link {
+  font-size: 18px;
+  /* Adjust font size as needed */
+  color: rgb(255, 255, 255);
+  /* Change text color if desired */
+}
+
+.navbar-nav .nav-link:hover {
+  text-decoration: none;
+  /* Remove underline on hover */
+  color: #fefefe;
+  /* Adjust hover color */
+}
+
+.navbar-toggler-icon {
+  color: #fff;
+}
+
+.navbar-nav .nav-link {
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+}
+
+.navbar-nav .nav-link:hover {
+  background-color: #007bff;
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.navbar-nav .nav-link.active {
+  background-color: #007bff;
+  color: #fff;
+
+}
+
+.navbar-nav .nav-link:active .submenu,
+.navbar-nav .nav-link:hover .submenu {
+  display: block;
+}
+
+.main {
+  grid-area: main;
+}
+
+.no-accordeon::after {
+  display: none;
+}
+
+.no-accordeon button::after {
+  display: none;
+}
+
+.leftColumnContainer {
+  max-width: 200px;
+  background-color: white;
+  color: #fff;
+}
+
+.containerdasboard {
+
+  background-color: #ffffff;
+  color: #fff;
+}
+
+.leftMenuMain .accordion-body {
+  padding-right: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  
+}
+
+
+.leftMenuMain .accordion-item {
+  border: 0;
+}
+
+.navbar-nav .nav-link:hover {
+  cursor: pointer;
+}
+
+
+/* Add this CSS to your stylesheet */
+.leftMenuMain {
+  background-color: #fafafa;
+  /* Set background color to white */
+
+  /* Add rounded corners */
+ 
+  /* Add padding for spacing */
+}
+
+.accordion-item {
+  background-color: #ffffff;
+  /* Set background color for accordion items */
+}
+
+.col {
+  width: 100%;
+  overflow: hidden;
+}
+.accordion {
+  background-color: #fff;
+  /* Fondo blanco */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.accordion-item {
+  border-bottom: 1px solid #ddd;
+}
+
+.accordion-button {
+  background-color: #fff;
+  color: #333;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.accordion-button:hover {
+  background-color: #f0f0f0;
+}
+
+.accordion-button[aria-expanded="true"] {
+  background-color: #007bff;
+  /* Azul de Bootstrap (ajusta según tu preferencia) */
+  color: #fff;
+}
+
+.accordion-body {
+  padding: 4rem 1.5rem;
+  background-color: #f8f9fa;
+  /* Gris claro */
+}
