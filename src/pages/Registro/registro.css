@@ -7,7 +7,7 @@
   }
   
  .P-color {
-   color: #160202;
+   color: #10035c;
    font-size: 20px;
    font-weight: bold;
    margin-bottom: 20px;
@@ -36,7 +36,7 @@
   color: #172330;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid #ced4da;
+  border: 1px solid #d9ceda;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }

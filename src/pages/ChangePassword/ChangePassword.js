@@ -9,6 +9,7 @@ import { queryWithBody } from "../../helpers/queryCall";
 import { useNavigate } from 'react-router-dom';
 import ToogleSectionsTable from "../../components/SectionsToggler/ToogleSectionsTable";
 
+
 const ChangePassword = () => {
     const [selectedSection, setSelectedSection] = useState('section1');
 

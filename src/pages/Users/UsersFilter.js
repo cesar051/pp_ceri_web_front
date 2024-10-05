@@ -6,10 +6,10 @@ const UsersFilter = (props) => {
 
     return (
         <>
-            <Accordion>
+            <Accordion className="acocordionuser">
                 <Accordion.Item eventKey="0">
-                    <Accordion.Header>Filtrar</Accordion.Header>
-                    <Accordion.Body>
+                    <Accordion.Header className="acocordionuserheader">Filtrar</Accordion.Header>
+                    <Accordion.Body className="acocordionuserbody">
                         <Form>
                             <Form.Group controlId="filtroEstadoSelect">
                                 <Form.Label>Filtrar por Estado</Form.Label>

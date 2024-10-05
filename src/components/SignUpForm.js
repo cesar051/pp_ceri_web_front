@@ -45,7 +45,7 @@ const SignUpForm = () => {
         {
             hook: isValidPassword,
             params: { passwordString: formData.password },
-            errorMessage: "Contraseña invalida"
+            errorMessage: "Contraseña invalida - La contraseña debe tener más de 8 caracteres!"
         }
     ]
 

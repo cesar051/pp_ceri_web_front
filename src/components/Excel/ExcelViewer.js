@@ -7,7 +7,7 @@ const ExcelViewer = ({ excelData }) => {
         <>
             {excelData && (
                 <div>
-                    <h3>Vista previa de los datos del Excel:</h3>
+                    <h3>Vista previa de los datos Importados :</h3>
                     {/* Contenedor para la tabla con scroll */}
                     <div style={{ maxHeight: '400px', overflowY: 'scroll' }}>
                         <Table striped bordered hover>
