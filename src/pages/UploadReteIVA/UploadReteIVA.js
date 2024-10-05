@@ -6,6 +6,7 @@ import * as XLSX from 'xlsx';
 import { ExcelDataValidator } from "../../helpers/ExcelFunctions/ExcelDataValidator";
 import { toast } from "react-toastify";
 import { queryWithBody } from "../../helpers/queryCall";
+import './UploadReteIVA.css';
 
 const UploadReteIVA = () => {
 

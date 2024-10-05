@@ -1,0 +1,19 @@
+
+.excel-uploader {
+    display: flex;
+    align-items: center;
+}
+
+.excel-uploader input[type="file"] {
+    flex: 1;
+    /* Allow the file input to take up available space */
+}
+
+.excel-uploader button {
+    margin-left: 5px;
+    /* Add a small margin between the input and button */
+}
+.excel-uploader {
+    font-size: 13px;
+    /* Adjust the font size as needed */
+}

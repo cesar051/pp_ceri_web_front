@@ -7,6 +7,7 @@ import { useAuth } from "../../auth/AuthProvider";
 import { generatePDF } from "./generatePDF";
 import { toast } from "react-toastify";
 import { queryWithBody } from "../../helpers/queryCall";
+import './ExportCertificate.css';
 
 const ExportCertificate = () => {
 
@@ -98,13 +99,15 @@ const ExportCertificate = () => {
 
     return (
         <>
-            Exportar certificado {actionExport}
+        <p></p>
+        
+          <h2>Exportar certificado {actionExport}</h2>  
 
             <div>
 
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label htmlFor="year">Año</label>
+                        <label htmlFor="year">Año : </label>
                         <select id="select" value={year} onChange={(e) => handleYearChange(e)}>
                             <option value="">Seleccione</option>
                             {AVAILABLE_YEARS_FOR_EXPORT.map((item, index) => (
@@ -114,7 +117,7 @@ const ExportCertificate = () => {
 
                     </div>
                     <div className="form-group">
-                        <label htmlFor="periodo">Periodo</label>
+                        <label htmlFor="periodo">Periodo: </label>
                         <select id="select" value={periodo} onChange={(e) => handlePeriodoChange(e)}>
                             <option value="">Seleccione</option>
                             {AVAILABLE_PERIODS_FOR_EXPORT.map((item, index) => (
