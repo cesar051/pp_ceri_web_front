@@ -26,7 +26,7 @@ export function isValidMail(params) {
 
 export function isValidPassword(params) {
     // Validar la contraseña
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    const passwordRegex = /^[A-Za-z\d\W]{8,}$/;
     if (!passwordRegex.test(params.passwordString)) {
         return false;
     }

@@ -2,14 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthProvider';
 import { queryGET } from '../helpers/queryCall';
+import { isValidMail, isValidPassword } from '../helpers/stringValidations';
+import { toast } from 'react-toastify';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const auth = useAuth();
+
   const emailAndPasswordValid = () => {
-    return true
+    return isValidMail({ mailString: email }) && isValidPassword({ passwordString: password })
   }
 
   useEffect(() => {
@@ -39,9 +42,11 @@ const LoginForm = () => {
           //setLoginSuccessful(false);
         }
       } else if (result.statusCode === 400 && result.message === "wrong user/password") {
-        //toast.warn("Contraseña/Usuario incorrectos");
+        toast.warn("Contraseña/Usuario no coinciden");
       }
 
+    } else {
+      toast.warn("Contraseña/Usuario no coinciden");
     }
     // Aquí puedes trabajar con los datos obtenidos en la respuesta  
   }
@@ -52,8 +57,12 @@ const LoginForm = () => {
     if (emailAndPasswordValid()) {
 
       const url = `${process.env.REACT_APP_API_URL}/userLogin?userEmail=${encodeURIComponent(email)}&userPassword=${encodeURIComponent(password)}`;
-      queryGET(url, loginQueryCallback)
+      queryGET(url, loginQueryCallback, () => {
+        toast.warn("Contraseña/Usuario no coinciden");
+      })
 
+    } else {
+      toast.warn("Correo/contraseña no coinciden")
     }
   };
 
