@@ -31,9 +31,10 @@ const SignUpForm = () => {
         {
             hook: isAValidLength,
             params: {
-                isExact: true,
+                isExact: false,
                 string: formData.nit,
-                minLength: 9
+                minLength: 4,
+                maxLength: 50
             },
             errorMessage: "El NIT debe tener 9 digitos"
         },
@@ -110,7 +111,7 @@ const SignUpForm = () => {
             </div>
             <div className="form-group">
                 <label htmlFor="nit">NIT</label>
-                <input type="number" className="form-control"
+                <input type="text" className="form-control"
                     id="nit" placeholder="Ingrese su NIT" name="nit" value={formData.nit} onChange={(e) => handleInputChange(e)} />
             </div>
             <div className="form-group">
@@ -118,7 +119,7 @@ const SignUpForm = () => {
                 <input type="number" className="form-control"
                     id="numero" placeholder="3158654798" name="numero" value={formData.numero} onChange={(e) => handleInputChange(e)} />
             </div>
-           
+
             <div className="form-group">
                 <label htmlFor="password">Contraseña</label>
 

@@ -1,4 +1,4 @@
-export function queryGET(url, callBackFunction) {
+export function queryGET(url, callBackFunction, catchCallBackFunction) {
     fetch(url)
         .then(response => {
             if (!response.ok) {
@@ -8,6 +8,9 @@ export function queryGET(url, callBackFunction) {
         })
         .then(result => callBackFunction(result))
         .catch(error => {
+            if (catchCallBackFunction) {
+                catchCallBackFunction()
+            }
             console.error('Hubo un problema con la solicitud fetch:', error);
         });
 }
