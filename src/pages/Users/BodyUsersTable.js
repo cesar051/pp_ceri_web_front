@@ -1,6 +1,8 @@
 import React from "react";
 import { USER_STATES } from "../../constants";
 import { Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import { FaCheck, FaTimes } from 'react-icons/fa'; // Para los íconos
 
 const BodyUsersTable = (props) => {
 
@@ -8,11 +10,31 @@ const BodyUsersTable = (props) => {
         <>
             {props.currentItems.map((item, index) => (
                 <tr key={index}>
-                    <td>{item.id}</td>
-                    <td>{item.nit}</td>
-                    <td>{item.nombres}</td>
-                    <td>{item.correo}</td>
-                    <th>
+                    <td style={{ verticalAlign: 'middle' }}>{item.id}</td>
+                    <td style={{ verticalAlign: 'middle' }}>{item.nit}</td>
+                    <td style={{ verticalAlign: 'middle' }}>{item.nombres}</td>
+                    <td style={{ verticalAlign: 'middle' }}>
+                        <input
+                            type="email"
+                            name="email"
+                            value={props.userMails[item.id] || ''}
+                            onChange={(e) => props.handleMailChange(index, e, item.id)}></input>
+                        {/* Botón de Commit */}
+                        {props.originalUsersData[item.id].correo !== props.userMails[item.id] ?
+                            <Button variant="success" size="sm" className="m-1"
+                                onClick={(e) => { props.UpdateNewMailChange(index, e, item.id) }}>
+                                <FaCheck />
+                            </Button> : <div></div>}
+
+                        {/* Botón de Cancelar */}
+                        {props.originalUsersData[item.id].correo !== props.userMails[item.id] ?
+                            <Button variant="danger" size="sm" className="m-1"
+                                onClick={(e) => { props.cancelEmailChange(item.id) }}>
+                                <FaTimes />
+                            </Button>
+                            : <div></div>}
+                    </td>
+                    <th style={{ verticalAlign: 'middle' }}>
                         <Form.Select
                             style={{ backgroundColor: USER_STATES[props.selectedValues[item.id]].color, color: 'white' }}
                             value={props.selectedValues[item.id] || ''}

@@ -8,6 +8,8 @@ import { useAuth } from "../../auth/AuthProvider";
 import FirstRowUsersTable from "./FirstRowUsersTable";
 import BodyUsersTable from "./BodyUsersTable";
 import './UserFilter.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { isValidMail } from "../../helpers/stringValidations";
 
 const Users = () => {
 
@@ -16,6 +18,7 @@ const Users = () => {
     const [itemsPerPage] = useState(5);
     const [numberOfUsers, setNumberOfUsers] = useState(0);
     const currentItems = data[currentPage];
+    const [originalUsersData, setOriginalUsersData] = useState({});
 
     const auth = useAuth();
 
@@ -34,6 +37,16 @@ const Users = () => {
                     setSelectedValues((prevValues) => ({
                         ...prevValues,
                         [user.id]: user.estado// Actualiza el valor del select correspondiente en el objeto
+                    }));
+
+                    setUserMails((prevValues) => ({
+                        ...prevValues,
+                        [user.id]: user.correo// Actualiza el valor del select correspondiente en el objeto
+                    }));
+
+                    setOriginalUsersData((prevValues) => ({
+                        ...prevValues,
+                        [user.id]: user// Actualiza el valor del select correspondiente en el objeto
                     }));
                 })
             })
@@ -103,6 +116,14 @@ const Users = () => {
                         ...prevValues,
                         [user.id]: user.estado// Actualiza el valor del select correspondiente en el objeto
                     }));
+                    setUserMails((prevValues) => ({
+                        ...prevValues,
+                        [user.id]: user.correo// Actualiza el valor del select correspondiente en el objeto
+                    }));
+                    setOriginalUsersData((prevValues) => ({
+                        ...prevValues,
+                        [user.id]: user// Actualiza el valor del select correspondiente en el objeto
+                    }));
                 })
             })
 
@@ -117,7 +138,7 @@ const Users = () => {
     };
 
     const [selectedValues, setSelectedValues] = useState({});
-
+    const [userMails, setUserMails] = useState({});
 
     const UpdateNewSelectChange = (userId, newUserState, prevUserState) => {
         const url = `${process.env.REACT_APP_API_URL}/updateUserState`;
@@ -153,6 +174,63 @@ const Users = () => {
         queryWithBody(url, requestData, callBackUpdateUserState, errorCallBackFunctionRegister, authParams, 'POST', errorCallBackFunctionRegister);
     }
 
+    const UpdateNewMailChange = (id, event, userId) => {
+        const newUserMail = userMails[userId];
+        console.log({ mailString: newUserMail });
+        console.log(userId);
+
+        if (!isValidMail({ mailString: newUserMail })) {
+            toast.warn("Email no valido");
+            return
+        }
+
+        const url = `${process.env.REACT_APP_API_URL}/updateUserMail`;
+        const requestData = {
+            "userIdToUpdate": userId,
+            "newUserMail": newUserMail
+        };
+
+        const callBackUpdateUserState = (data) => {
+            console.log(data)
+            if (data && data.statusCode === 200) {
+                toast.success("Correo cambiado exitosamente")
+                const lastData = originalUsersData[userId]
+                lastData.correo = newUserMail;
+                setOriginalUsersData((prevValues) => ({
+                    ...prevValues,
+                    [userId]: lastData// Actualiza el valor del select correspondiente en el objeto
+                }));
+            } else { // se devuelve al valor original
+                /*setSelectedValues((prevValues) => ({
+                    ...prevValues,
+                    [userId]: originalUsersData[userId].correo
+                }));*/
+                toast.info(`No se ha podido actualizar el correo del usuario ${userId}`)
+            }
+        }
+        const errorCallBackFunctionRegister = () => {
+            setSelectedValues((prevValues) => ({
+                ...prevValues,
+                [userId]: originalUsersData[userId].correo
+            }));
+            toast.info(`No se ha podido actualizar el correo del usuario ${userId}`)
+        }
+        const authParams = {
+            requiereAuthentication: true,
+            token: auth.getAccessToken()
+        }
+        console.log(newUserMail);
+
+        queryWithBody(url, requestData, callBackUpdateUserState, errorCallBackFunctionRegister, authParams, 'POST', errorCallBackFunctionRegister);
+    }
+
+    const cancelEmailChange = (userId) => {
+        setUserMails((prevValues) => ({
+            ...prevValues,
+            [userId]: originalUsersData[userId].correo
+        }));
+    }
+
     const handleSelectChange = (id, event, userId) => {
         const prevFieldValue = selectedValues[userId];
         const value = event.target.value;
@@ -162,6 +240,17 @@ const Users = () => {
         }));
         UpdateNewSelectChange(userId, value, prevFieldValue)
         console.log(`Opción seleccionada cambia desde ${prevFieldValue} en select ${id} userid ${userId}:`, value);
+    };
+
+    const handleMailChange = (id, event, userId) => {
+        //const prevFieldValue = userMails[userId];
+        const value = event.target.value;
+        setUserMails((prevValues) => ({
+            ...prevValues,
+            [userId]: value // Actualiza el valor del select correspondiente en el objeto
+        }));
+        //UpdateNewSelectChange(userId, value, prevFieldValue)
+        //console.log(`Opción seleccionada cambia desde ${prevFieldValue} en select ${id} userid ${userId}:`, value);
     };
 
     useEffect(() => {
@@ -178,6 +267,15 @@ const Users = () => {
                     setSelectedValues((prevValues) => ({
                         ...prevValues,
                         [user.id]: user.estado// Actualiza el valor del select correspondiente en el objeto
+                    }));
+                    setUserMails((prevValues) => ({
+                        ...prevValues,
+                        [user.id]: user.correo// Actualiza el valor del select correspondiente en el objeto
+                    }));
+
+                    setOriginalUsersData((prevValues) => ({
+                        ...prevValues,
+                        [user.id]: user// Actualiza el valor del select correspondiente en el objeto
                     }));
                 })
             })
@@ -209,7 +307,12 @@ const Users = () => {
                     bodyTable={<BodyUsersTable
                         currentItems={currentItems}
                         selectedValues={selectedValues}
-                        handleSelectChange={handleSelectChange} />}
+                        handleSelectChange={handleSelectChange}
+                        userMails={userMails}
+                        handleMailChange={handleMailChange}
+                        UpdateNewMailChange={UpdateNewMailChange}
+                        originalUsersData={originalUsersData}
+                        cancelEmailChange={cancelEmailChange} />}
                 />
             </div>
         </>
