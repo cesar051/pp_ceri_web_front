@@ -126,6 +126,10 @@ export const requiredColumnsUploadIVA = {
 
 export const AVAILABLE_YEARS_FOR_EXPORT = [
     {
+        value: "2025",
+        label: "2025"
+    },
+    {
         value: "2024",
         label: "2024"
     },
@@ -152,13 +156,33 @@ export const AVAILABLE_PERIODS_FOR_EXPORT = [
         value: "2",
         label: "2"
     },
+     {
+        value: "3",
+        label: "3"
+    },
+
+     {
+        value: "4",
+        label: "4"
+    },
+
+     {
+        value: "5",
+        label: "5"
+    },
+
+     {
+        value: "6",
+        label: "6"
+    }
+
 
 ]
 
 export const COMPANY_INFO = {
     razon_social_completa: 'ALMACENES MAXIMO S.A.S.',
-    nit: '800082633',
-    direccion: 'Carrera 106 No.15A',
+    nit: '860045854',
+    direccion: 'Cra. 106 No.15A-25 Mz 4 int 37 ZF',
     municipio: 'Bogotá',
     departamento: 'Cundinamarca'
 }
