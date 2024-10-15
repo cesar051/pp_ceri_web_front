@@ -36,7 +36,7 @@ const BodyUsersTable = (props) => {
                     </td>
                     <th style={{ verticalAlign: 'middle' }}>
                         <Form.Select
-                            style={{ backgroundColor: USER_STATES[props.selectedValues[item.id]].color, color: 'white' }}
+                            style={{ backgroundColor: USER_STATES[props.selectedValues[item.id]].color || 'white', color: 'white' }}
                             value={props.selectedValues[item.id] || ''}
                             onChange={(e) => props.handleSelectChange(index, e, item.id)}
                         >

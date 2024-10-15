@@ -6,13 +6,13 @@
     /* Ajusta el padding, border-radius y box-shadow según tus preferencias */
   }
   
- .P-color {
-   color: #10035c;
-   font-size: 20px;
-   font-weight: bold;
-   margin-bottom: 20px;
- }
-
+  .P-color {
+    color: #333; /* Color del texto */
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
   /* Estilos adicionales para personalizar aún más */
   .Registro {
     /* Estilos para el contenedor principal del componente Registro */
@@ -37,7 +37,7 @@
   color: #495057;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid #d9ceda;
+  border: 1px solid #ced4da;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }

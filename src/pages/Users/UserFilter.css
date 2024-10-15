@@ -1,5 +1,5 @@
 /* Style the Accordion component */
-.acocordionuser{
+.acocordionuser {
     border: 1px solid #fefefe;
     border-radius: 4px;
     margin-bottom: 1rem;
@@ -96,4 +96,8 @@ table {
 .form-control {
     font-size: 16px;
     /* Ajusta el tamaño según tus necesidades */
+}
+
+input[type="email"] {
+    border: 0;
 }
