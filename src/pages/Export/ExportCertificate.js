@@ -62,7 +62,7 @@ const ExportCertificate = () => {
                     periodo: periodo,
                     year: year,
                     concepto: actionExport,
-                    DBData: data.data[0]
+                    DBData: data.data
                 }))
             }
         }

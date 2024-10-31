@@ -20,8 +20,8 @@ export function generatePDF(data) {
     const cellValues = {
         '0,6': ['Fecha de Expedición (Dia.mes.año)', getCurrentDate()],
         '1,6': ['Año fiscal', data.year],
-        '2,0': ['Ciudad donde se consignó la retención', data.DBData.ciudad_pago],
-        '3,0': ['Nombre o Razón Social a quien se le practica la retención', data.DBData.descripcion],
+        '2,0': ['Ciudad donde se consignó la retención', data.DBData[0].ciudad_pago],
+        '3,0': ['Nombre o Razón Social a quien se le practica la retención', data.DBData[0].descripcion],
         '3,6': ['CC o NIT', data.nit],
         '4,0': ['Razón Social completa', COMPANY_INFO.razon_social_completa],
         '4,6': ['CC o NIT', COMPANY_INFO.nit],
@@ -127,6 +127,46 @@ export function generatePDF(data) {
         }
     });
 
+    let certificateContent = [];
+    let sumatoriaMontos = 0;
+    let sumatoriaRetenidos = 0;
+    data.DBData.forEach(element => {
+        certificateContent.push(
+            [{
+                content: valuesDBConcepto[data.concepto],
+                colSpan: 4, // Esto hace que la celda ocupe 6 columnas
+                styles: { halign: 'left', fontSize: 10 },
+            },
+            {
+                content: data.periodo,
+                colSpan: 2, // Ocupa las 6 columnas
+                styles: { halign: 'center', fontSize: 10 },
+            },
+            {
+                content: `${element.porcentaje}% `,
+                colSpan: 2, // Ocupa las 6 columnas
+                styles: { halign: 'center', fontSize: 10 },
+            },
+            {
+                content: `$${moneyFormater.format(element.base)}`,
+                colSpan: 4, // Ocupa las 6 columnas
+                styles: { halign: 'center', fontSize: 10 },
+            },
+            {
+                content: `$${moneyFormater.format(element.retenido)}`,
+                colSpan: 3, // Ocupa las 6 columnas
+                styles: { halign: 'center', fontSize: 10 },
+            },
+            {
+                content: `$${moneyFormater.format(element.retenido)}`,
+                colSpan: 3, // Ocupa las 6 columnas
+                styles: { halign: 'center', fontSize: 10 },
+            }]
+        );
+        sumatoriaMontos += element.base
+        sumatoriaRetenidos += element.retenido
+    });
+
     doc.autoTable({
         theme: 'grid',
         head: [
@@ -160,37 +200,8 @@ export function generatePDF(data) {
             ]
         ],
         body: [
-
-            [{
-                content: valuesDBConcepto[data.concepto],
-                colSpan: 4, // Esto hace que la celda ocupe 6 columnas
-                styles: { halign: 'left', fontSize: 10 },
-            },
-            {
-                content: data.periodo,
-                colSpan: 2, // Ocupa las 6 columnas
-                styles: { halign: 'center', fontSize: 10 },
-            },
-            {
-                content: `${data.DBData.porcentaje}% `,
-                colSpan: 2, // Ocupa las 6 columnas
-                styles: { halign: 'center', fontSize: 10 },
-            },
-            {
-                content: moneyFormater.format(data.DBData.base),
-                colSpan: 4, // Ocupa las 6 columnas
-                styles: { halign: 'center', fontSize: 10 },
-            },
-            {
-                content: moneyFormater.format(data.DBData.retenido),
-                colSpan: 3, // Ocupa las 6 columnas
-                styles: { halign: 'center', fontSize: 10 },
-            },
-            {
-                content: moneyFormater.format(data.DBData.retenido),
-                colSpan: 3, // Ocupa las 6 columnas
-                styles: { halign: 'center', fontSize: 10 },
-            }],
+            ...certificateContent
+            ,
             [{
                 content: 'Total',
                 colSpan: 6, // Esto hace que la celda ocupe 6 columnas
@@ -202,25 +213,25 @@ export function generatePDF(data) {
                 styles: { halign: 'center', fontSize: 10 },
             },
             {
-                content: `$${moneyFormater.format(data.DBData.base)}`,
+                content: `$${moneyFormater.format(sumatoriaMontos)}`,
                 colSpan: 4, // Ocupa las 6 columnas
                 styles: { halign: 'center', fontSize: 10, fontStyle: 'bold' },
             },
             {
-                content: `$${moneyFormater.format(data.DBData.retenido)}`,
+                content: `$${moneyFormater.format(sumatoriaRetenidos)}`,
                 colSpan: 3, // Ocupa las 6 columnas
                 styles: { halign: 'center', fontSize: 10, fontStyle: 'bold' },
             },
             {
-                content: `$${moneyFormater.format(data.DBData.retenido)}`,
+                content: `$${moneyFormater.format(sumatoriaRetenidos)}`,
                 colSpan: 3, // Ocupa las 6 columnas
                 styles: { halign: 'center', fontSize: 10, fontStyle: 'bold' },
-            }],
+            }]/*,
             [{
                 content: ' ',
                 colSpan: 2, // Ocupa las 6 columnas
                 styles: { halign: 'center', fontSize: 10 },
-            }]
+            }]*/
         ],
         didParseCell: function (data) {
             // Eliminar los bordes de la última fila (índice 3)
