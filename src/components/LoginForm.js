@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthProvider';
 import { queryGET } from '../helpers/queryCall';
-import { isValidMail, isValidPassword } from '../helpers/stringValidations';
+import { isAValidLength, isValidMail, isValidPassword } from '../helpers/stringValidations';
 import { toast } from 'react-toastify';
 
 const LoginForm = () => {
@@ -12,7 +12,7 @@ const LoginForm = () => {
   const auth = useAuth();
 
   const emailAndPasswordValid = () => {
-    return isValidMail({ mailString: email }) && isValidPassword({ passwordString: password })
+    return (isValidMail({ mailString: email }) || isAValidLength({ string: email, isExact: false, minLength: 4, maxLength: 50 })) && isValidPassword({ passwordString: password })
   }
 
   useEffect(() => {
@@ -69,9 +69,9 @@ const LoginForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">
-        <label htmlFor="email">Email</label>
-        <input type="email" className="form-control"
-          id="email" placeholder="Ingrese su email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <label htmlFor="email">Email/NIT</label>
+        <input type="" className="form-control"
+          id="email" placeholder="Ingrese su email o NIT" value={email} onChange={(e) => setEmail(e.target.value)} />
       </div>
       <div className="form-group">
         <label htmlFor="password">Contraseña</label>

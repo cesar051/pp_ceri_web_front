@@ -64,6 +64,15 @@ export const requiredColumnsUploadIVA = {
         optional_names: [],
         cast: (num) => +(Math.round(num + `e2`) + `e-2`)
     },
+    "iva": {
+        mandatory: false,
+        null: true,
+        default_value: 0,
+        type: "NUMERIC",
+        length: [14, 2],
+        optional_names: [],
+        cast: (num) => +(Math.round(num + `e2`) + `e-2`)
+    },
     "retenido": {
         mandatory: true,
         null: false,

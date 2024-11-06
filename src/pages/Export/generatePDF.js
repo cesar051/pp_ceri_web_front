@@ -148,7 +148,7 @@ export function generatePDF(data) {
                 styles: { halign: 'center', fontSize: 10 },
             },
             {
-                content: `$${moneyFormater.format(element.base)}`,
+                content: data.concepto === 'iva' ? `$${moneyFormater.format(element.iva)}` : `$${moneyFormater.format(element.base)}`,
                 colSpan: 4, // Ocupa las 6 columnas
                 styles: { halign: 'center', fontSize: 10 },
             },
@@ -163,7 +163,7 @@ export function generatePDF(data) {
                 styles: { halign: 'center', fontSize: 10 },
             }]
         );
-        sumatoriaMontos += element.base
+        sumatoriaMontos += data.concepto === 'iva' ? element.iva : element.base
         sumatoriaRetenidos += element.retenido
     });
 
@@ -187,7 +187,7 @@ export function generatePDF(data) {
                     styles: { halign: 'center', fontSize: 10 },
                 },
                 {
-                    content: `Monto Total`,
+                    content: data.concepto === 'iva' ? 'IVA' : `Monto Total`,
                     colSpan: 4, // Ocupa las 6 columnas
                     styles: { halign: 'center', fontSize: 10 },
                 },
